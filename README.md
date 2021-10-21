@@ -1,6 +1,6 @@
 # Sistema-Bancario
 
-OBS- Pra editar o codigo baixem em ZIP e coloquem tudo na mesma pasta, depois executa
+<i>OBS- Pra editar o codigo baixem em ZIP e coloquem tudo na mesma pasta, depois executa
 
 DICIONARIO DE COMANDOS 
 
