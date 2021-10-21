@@ -2,7 +2,7 @@
 
 <i>OBS- Pra editar o codigo baixem em ZIP e coloquem tudo na mesma pasta, depois executa
 
-DICIONARIO DE COMANDOS 
+<B>DICIONARIO DE COMANDOS 
 
 "r" Abre um arquivo texto para leitura. O arquivo deve existir antes de ser aberto.
 
