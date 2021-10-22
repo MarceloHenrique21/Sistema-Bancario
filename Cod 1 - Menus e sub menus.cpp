@@ -72,14 +72,14 @@ void tela2(){
      
      printf("\n\n\n");
      printf("1 - Ir para menu de consultas \n\n");
-     printf("2 - ir para o menu de inclus„o de dados \n\n");
-     printf("3 - Ir para menu de exclus„o de dados \n\n");
-     printf("4 - Ir para menu de alteraÁ„o de dados \n\n");
-     printf("5 - Ir para os creditos da aplicaÁ„o \n\n");
+     printf("2 - ir para o menu de inclus√£o de dados \n\n");
+     printf("3 - Ir para menu de exclus√£o de dados \n\n");
+     printf("4 - Ir para menu de altera√ß√£o de dados \n\n");
+     printf("5 - Ir para os creditos da aplica√ß√£o \n\n");
      
      printf("\n\n");
      
-     printf("Digite uma das opÁıes para prosseguir: ");
+     printf("Digite uma das op√ß√µes para prosseguir: ");
      scanf("%i", &escolha1);
      printf("\n\n");
      
@@ -90,7 +90,7 @@ void tela2(){
 
 int main(){
     
-        // Biblioteca para utilizar acentuaÁ„o em portugues   
+        // Biblioteca para utilizar acentua√ß√£o em portugues   
     	setlocale(LC_ALL, "portuguese");
 
             //le o arquivo texto Clientes
@@ -122,7 +122,18 @@ int main(){
                                            system("cls");
                                            
                                            printf("\n\n  MENU DE CONSULTAS \n\n");
-                                           printf("falta fazer \n\n");
+                                           printf("falta terminar \n\n");
+                                           
+                                           
+                                           printf("\n\n");
+                                           printf("1 - Consultar clientes por cidade ou estado \n\n");
+                                           printf("2 - Total em aberto \n\n");
+                                           printf("3 - Total recebido \n\n");
+                                           printf("4 - total geral \n\n");
+                                           
+                                           printf("\n\n\n");
+                                           
+                                           
                                            
                                            break;
                                            
@@ -153,7 +164,7 @@ int main(){
                                            printf("falta fazer \n\n");
                                                       
                                                                  break;
-  //------------------------------MENU DE ALTERA«√O DE DADOS---------------------------------------------------------------------------------                                                               
+  //------------------------------MENU DE ALTERA√á√ÉO DE DADOS---------------------------------------------------------------------------------                                                               
                                    case 4:
                                                                             
                                       //congela a tela por 1 segundo antes de encaminhar o usuario para o proximo menu 
@@ -162,7 +173,7 @@ int main(){
                                            // limpa a tela do menu anterior 
                                            system("cls");
                                            
-                                           printf("\n\n  MENU DE ALTERA«√O DE DADOS \n\n");
+                                           printf("\n\n  MENU DE ALTERA√á√ÉO DE DADOS \n\n");
                                            printf("falta fazer \n\n");
                                                       
                                                                             break;
