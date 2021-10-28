@@ -1,199 +1,152 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
+#include <conio.h>
 #include <string.h>
+#include <locale.h>
 #include <windows.h>
 
+FILE *arqcli;
+FILE *arqpar;
 
 
-            FILE *arq;
+            struct registroCli{
+            char codigo[10];
+            char nome [50];
+            char cidade [30];
+            char uf[3];
+            char cpf[15];
+            bool status;
             
-            char *result;
-            char linhas[200][100];
-            char mat[200][4][100];
-            char menu1;
+            };
             
+//================================================
             
-            
-            int tot,x,escolha1;
-//-----------------------------------------------------------------------------------
-void apresenta(){
-     
-                 
-                 for (x=0;x<=tot;x++)
-                       
-                        printf("%s\n\n",linhas[x]);
-                      
- }
- 
- //-------------------------------------------------------------------------------------------
-void le_arquivo1() {
-     
-     
-     
-     arq = fopen("Clientes.txt", "r"); //leitura
-     
-     
-             if (arq == NULL) // Se houve erro na abertura
-     
-                printf("Problemas na abertura do arquivo\n");
-               
-               
-                                  else {
-                           
-                                          tot=0;
-                             
-                             
-             
-             
-                  while (!feof(arq)){
-                                        
-                                               
-                         result = fgets(linhas[tot], 100, arq); // o 'fgets' le  ate 99 caracteres ou ate o '\n'
-                            
-            
-            if (linhas[tot][strlen(linhas[tot])-1]=='\n')
-              
-               linhas[tot][strlen(linhas[tot])-1]='\0'; //caso o ultimo caracter seja /n, sera substituido por /0 (fin de string)
-                 
-                 tot++;
-               }
-               
-                         fclose(arq);
-                         tot--;
-                     }
-                     
-                    }
+            char linha[200];
+            char tmp[200];
+            struct registroCli cli[200];
+ //=================================================     
+int opmen1,totcli,p,col;
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+void separa(){
+     p=0;
+	 while (linha[col]!='"' && col<strlen(linha))  {
+            tmp[p]=linha[col];
+            col++; //posicao na linha
+            p++; //posicao no campo
+          }
+          col=col+3;
+          tmp[p]='\0';     
+     }
+//----------------------------------------------------------------------------
+void le_cliente(){
+char *result;
+  arqcli = fopen("clientes.txt", "r"); //leitura
+  if (arqcli == NULL)  // Se houve erro na abertura
+  
+     printf("Problemas na abertura do arquivo\n");
+  else   
+   { 
+      totcli=0;
+      printf("\n\nestamos lendo o arquivo texto de cliente...\n\n");
+      Sleep(2000);
+	  while (!feof(arqcli))
+      {
+	      result = fgets(linha, 200, arqcli);  // o 'fgets' le ate 99 caracteres ou ate o '\n'
+          if (linha[strlen(linha)-1]=='\n')
+                linha[strlen(linha)-1]='\0'; //caso o ultimo caracter seja /n, sera substituido por /0 (fin de string)
+	      //linha=""6969","ELETRONICA BRILHASOM","FEIRA DE SANTANA","BA","0","075-221-8708   ","0","63.193.700/0001-60","
+	      col=1;
+	      
+         separa();
+            	      strcpy(cli[totcli].codigo,tmp);
+            	      
+                      separa();
+            	      strcpy(cli[totcli].nome,tmp);
+            	      
+            	      separa();
+            	      strcpy(cli[totcli].cidade,tmp);
+            	      
+            	      separa();
+            	      strcpy(cli[totcli].uf,tmp);
+            	      
+            	      separa();
+            	      strcpy(cli[totcli].cpf,tmp);
+	      
+	      separa(); //lixo1
+	      separa(); //lixo2
+	      separa(); //lixo3
+	      
+	    
+	      
 
-//--------------------------------------------------------------------------------
+     
+          
+          totcli++;  
+         
+      }
+      fclose(arqcli);	
+      totcli--;
+      printf("importacao concluida. \n\n\n");
+      Sleep(2000);
+   } 
+}
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
 
-void tela2(){
+void menu_principal(){
      
-     
+     system("cls");  
      printf("\n\n\n");
-     printf("1 - Ir para menu de consultas \n\n");
-     printf("2 - ir para o menu de inclusão de dados \n\n");
-     printf("3 - Ir para menu de exclusão de dados \n\n");
-     printf("4 - Ir para menu de alteração de dados \n\n");
-     printf("5 - Ir para os creditos da aplicação \n\n");
+     printf("1 - Importacao \n\n");
+     printf("2 - clientes \n\n");
+     printf("3 - parcelas \n\n");
+     printf("4 - consultas \n\n");
+     printf("5 - creditos \n\n");
+     printf("6 - fim \n\n");
      
      printf("\n\n");
      
      printf("Digite uma das opções para prosseguir: ");
-     scanf("%i", &escolha1);
+     scanf("%i", &opmen1);
      printf("\n\n");
      
-     
-     
+     switch(opmen1){
+                    
+        case 1:
+              setlocale(LC_ALL, "portuguese");
+              
+             system("cls");
+              le_cliente();
+              
+                for (int x=0; x<totcli; x++){
+                                                         
+        printf("|||Código do cliente: %s -  Nome do Cliente: %s - Uf: %s ~~~\n\n\n",cli[x].codigo,cli[x].nome,cli[x].uf);    
+                                         
+                                            }
+                                            
+                                            system("pause");
+                                            
+              //le_parcela();
+              break;
+        case 2:
+              //menu_cliente();
+              printf("escolheu opcao 2");
+
+              break;      
      
      }
 
+}
+
+//----------------------------------------------------------------------------
+
 int main(){
     
-        // Biblioteca para utilizar acentuação em portugues   
-    	setlocale(LC_ALL, "portuguese");
-
-            //le o arquivo texto Clientes
-            le_arquivo1();
-    
-                    //Apresenta os dados do arquivo texto clientes
-                     apresenta();
-
-
-       // Congela a tela durante 3 segundos
-        Sleep(2000);
-        
-        // limpa a tela dps de ter apresentado os arquivos
-        system("cls");
-     
-     
-            
-                             //Apresenta a primeira tela de menu do sistema
-                             tela2();
-                             
- //------------------------------------- MENU DE CONSULTAS --------------------------------------------------------------------------                            
-                             switch(escolha1){
-                                      
-                                     case 1:
-                                      //congela a tela por 1 segundo antes de encaminhar o usuario para o proximo menu 
-                                      Sleep(1000);
-                                           
-                                           // limpa a tela do menu anterior 
-                                           system("cls");
-                                           
-                                           printf("\n\n  MENU DE CONSULTAS \n\n");
-                                           printf("falta terminar \n\n");
-                                           
-                                           
-                                           printf("\n\n");
-                                           printf("1 - Consultar clientes por cidade ou estado \n\n");
-                                           printf("2 - Total em aberto \n\n");
-                                           printf("3 - Total recebido \n\n");
-                                           printf("4 - total geral \n\n");
-                                           
-                                           printf("\n\n\n");
-                                           
-                                           
-                                           
-                                           break;
-                                           
- //-----------------------------MENU DE INCLUSAO DE DADOS----------------------------------------------------------------------------------
-                                           
-                              case 2:
-                                      //congela a tela por 1 segundo antes de encaminhar o usuario para o proximo menu 
-                                      Sleep(1000);
-                                           
-                                           // limpa a tela do menu anterior 
-                                           system("cls");
-                                           
-                                           printf("\n\n  MENU DE INCLUSAO DE DADOS \n\n");
-                                           printf("falta fazer \n\n");
-                                                      
-                                                      break;
- //------------------------------MENU DE EXCLUSAO DE DADOS---------------------------------------------------------------------------------                                                     
-                                                      
-                                  case 3:
-                                                                 
-                                      //congela a tela por 1 segundo antes de encaminhar o usuario para o proximo menu 
-                                      Sleep(1000);
-                                           
-                                           // limpa a tela do menu anterior 
-                                           system("cls");
-                                           
-                                           printf("\n\n  MENU DE EXCLUSAO DE DADOS \n\n");
-                                           printf("falta fazer \n\n");
-                                                      
-                                                                 break;
-  //------------------------------MENU DE ALTERAÇÃO DE DADOS---------------------------------------------------------------------------------                                                               
-                                   case 4:
-                                                                            
-                                      //congela a tela por 1 segundo antes de encaminhar o usuario para o proximo menu 
-                                      Sleep(1000);
-                                           
-                                           // limpa a tela do menu anterior 
-                                           system("cls");
-                                           
-                                           printf("\n\n  MENU DE ALTERAÇÃO DE DADOS \n\n");
-                                           printf("falta fazer \n\n");
-                                                      
-                                                                            break;
-  //--------------------------------CREDITO COM NOSSOS NOMES-------------------------------------------------------------------------------                                                                          
-                                     case 5:
-                                                                                           
-                                          //congela a tela por 1 segundo antes de encaminhar o usuario para o proximo menu 
-                                          Sleep(1000);
-                                               
-                                               // limpa a tela do menu anterior 
-                                               system("cls");
-                                               
-                                               printf("\n\n  CREDITO COM NOSSOS NOMES \n\n");
-                                               printf("falta fazer \n\n");
-                                                          
-                                                                               break;
-                                      
-                                      }
-                           
-//---------------------------------------------------------------------------------------------------------------                           
-		system("pause");
-	return (0);
+  
+      menu_principal();
+   
+    system("pause");
+   
 }
