@@ -8,11 +8,6 @@
 FILE *arqcli;
 FILE *arqpar;
 
-// NUMERO, CODIGO DO CLIENTE, DATAVENCIMENTO, DATA DE RECEBIMENTO (somente alguns registros possuem esta informação)
-//, VALOR e CODIGO DO BANCO.
-
-
-
     struct registroParc{
            
            char numero [8];
