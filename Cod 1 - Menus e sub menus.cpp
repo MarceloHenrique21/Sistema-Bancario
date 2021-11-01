@@ -8,6 +8,24 @@
 FILE *arqcli;
 FILE *arqpar;
 
+// NUMERO, CODIGO DO CLIENTE, DATAVENCIMENTO, DATA DE RECEBIMENTO (somente alguns registros possuem esta informação)
+//, VALOR e CODIGO DO BANCO.
+
+
+
+    struct registroParc{
+           
+           char numero [8];
+           char codCli [5];
+           char dataVenc [9];
+           char DataReceb [9];
+           char valor [6];
+           char codBanc [4];
+
+           };
+           
+           
+          
 
             struct registroCli{
             char codigo[10];
@@ -24,8 +42,10 @@ FILE *arqpar;
             char linha[200];
             char tmp[200];
             struct registroCli cli[200];
+            struct registroParc parc[200];
+
  //=================================================     
-int opmen1,totcli,p,col;
+int opmen1,totcli,p,col, totparce;
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
@@ -93,8 +113,132 @@ char *result;
    } 
 }
 //----------------------------------------------------------------------------
-//----------------------------------------------------------------------------
 
+
+void le_parcela(){
+char *result; 
+  arqpar = fopen("parcelas.txt", "r"); //leitura
+  if (arqpar == NULL)  // Se houve erro na abertura
+  
+     printf("Problemas na abertura do arquivo\n");
+  else   
+   { 
+      totcli=0;
+      printf("\n\nestamos lendo o arquivo texto de Parcelas...\n\n");
+      Sleep(2000);
+	  while (!feof(arqpar))
+      {
+	      result = fgets(linha, 200, arqpar);  // o 'fgets' le ate 99 caracteres ou ate o '\n'
+          if (linha[strlen(linha)-1]=='\n')
+                linha[strlen(linha)-1]='\0'; //caso o ultimo caracter seja /n, sera substituido por /0 (fin de string)
+	      //linha=""6969","ELETRONICA BRILHASOM","FEIRA DE SANTANA","BA","0","075-221-8708   ","0","63.193.700/0001-60","
+	      col=1;
+	      
+                      separa();
+         	          strcpy(parc[totparce].numero,tmp);
+            	      
+                      separa();
+            	      strcpy(parc[totparce].codCli,tmp);
+            	      
+            	      separa();
+            	      strcpy(parc[totparce].dataVenc,tmp);
+            	      
+            	      separa();
+            	      strcpy(parc[totparce].DataReceb,tmp);
+            	      
+            	      separa();
+            	      strcpy(parc[totparce].valor,tmp);
+            	      
+           	          separa();
+            	      strcpy(parc[totparce].codBanc,tmp);
+	      
+	      separa(); //lixo1
+	      separa(); //lixo2
+	      separa(); //lixo3
+	      
+	    
+	      
+
+     
+          
+          totparce++;  
+         
+      }
+      fclose(arqpar);	
+      totparce--;
+      printf("importacao concluida. \n\n\n");
+      Sleep(2000);
+   } 
+}
+//----------------------------------------------------------------------------
+void Creditos(){
+     
+        system("cls");
+               printf("\n\n                         Programa feito por: ");
+               Sleep(1500);
+               printf("\n          -  Emelin\n\n");
+               Sleep(1000);
+               printf("\n          -  Gabriel\n\n");
+               Sleep(1000);
+               printf("\n          -  Marcelo\n\n");
+               Sleep(1000);
+               printf("\n          -  Rudi\n\n");
+               Sleep(5000);
+               system("cls");
+               printf("\n\n                              Obrigado!\n\n\n");
+               
+               Sleep(1500);
+               
+               system("cls");
+               system("pause");
+          
+     }
+     
+//--------------------------------------------------------------------------------------------------------------------     
+void importarCliente(){
+     
+     
+          setlocale(LC_ALL, "portuguese");
+              
+             system("cls");
+              le_cliente();
+              
+                for (int x=0; x<totcli; x++){
+                                                         
+        printf("|||Código do cliente: %s -  Nome do Cliente: %s - Uf: %s ~~~\n\n\n",cli[x].codigo,cli[x].nome,cli[x].uf);    
+                                         
+                                            }
+                                            
+                                            system("pause");
+                                            
+     
+     
+     
+     }
+     
+//-----------------------------------------------------------------------------------------------------------------------------
+
+void importarParcelas(){
+     
+setlocale(LC_ALL, "portuguese");
+              
+      system("cls");
+      le_parcela();
+              
+     for (int x=0; x<totparce; x++){
+                                                         
+        printf("|||Numero da parcela: %s -  Codigo do Cliente: %s - data de vencimento: %s ~~~\n\n\n",parc[x].numero,parc[x].codCli,parc[x].dataVenc);    
+                                        
+                                          }
+                                            
+         system("pause");
+          
+     
+     
+     
+     
+     }
+//---------------------------------------------------------------------------------------------------
 void menu_principal(){
      
      system("cls");  
@@ -112,23 +256,14 @@ void menu_principal(){
      scanf("%i", &opmen1);
      printf("\n\n");
      
+     
+     
      switch(opmen1){
                     
         case 1:
-              setlocale(LC_ALL, "portuguese");
-              
-             system("cls");
-              le_cliente();
-              
-                for (int x=0; x<totcli; x++){
-                                                         
-        printf("|||Código do cliente: %s -  Nome do Cliente: %s - Uf: %s ~~~\n\n\n",cli[x].codigo,cli[x].nome,cli[x].uf);    
-                                         
-                                            }
-                                            
-                                            system("pause");
-                                            
-              //le_parcela();
+             
+         importarCliente();
+             
               break;
         case 2:
               //menu_cliente();
@@ -136,6 +271,26 @@ void menu_principal(){
 
               break;      
      
+     
+    
+    
+    
+    
+     case 3: 
+       
+          importarParcelas();
+          
+          break;
+          
+         
+         
+         
+         
+          case 5:
+               
+            Creditos();
+               
+               break;
      }
 
 }
