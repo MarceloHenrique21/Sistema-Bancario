@@ -8,6 +8,11 @@
 FILE *arqcli;
 FILE *arqpar;
 
+// NUMERO, CODIGO DO CLIENTE, DATAVENCIMENTO, DATA DE RECEBIMENTO (somente alguns registros possuem esta informação)
+//, VALOR e CODIGO DO BANCO.
+
+
+
     struct registroParc{
            
            char numero [8];
@@ -40,7 +45,7 @@ FILE *arqpar;
             struct registroParc parc[200];
 
  //=================================================     
-int opmen1,totcli,p,col, totparce;
+int opmen1, totcli, p, col, totparce, opmen2;
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
@@ -233,6 +238,9 @@ setlocale(LC_ALL, "portuguese");
      
      
      }
+     
+//------------------------------------------------------------------------------------------------------------------
+
 //---------------------------------------------------------------------------------------------------
 void menu_principal(){
      
@@ -253,18 +261,51 @@ void menu_principal(){
      
      
      
-     switch(opmen1){
+    
+
+}
+
+//----------------------------------------------------------------------------
+void sub_clientes1()
+{
+	printf("  --| Clientes |--\n\n");
+	printf("  1 - Consulta e classificação\n");
+	printf("  2 - Incluir novo cliente\n");
+	printf("  3 - Excluir cliente\n");
+	printf("  4 - Editar clientes existentes\n\n");	
+	printf("  5 - Voltar\n");
+	
+	printf("\n\n");
+     
+     printf("Digite uma das opções para prosseguir: ");
+     scanf("%i", &opmen2);
+     printf("\n\n");
+     
+     switch(opmen2){
                     
-        case 1:
+   	case 1:
+             
+     	system("cls");
+     	              	break;
+     		
+	case 5:
+             
+ 		  system("cls");
+    	  menu_principal();
+    	  
+    	   switch(opmen1){
+                    
+      case 1:
              
          importarCliente();
              
-              break;
-        case 2:
-              //menu_cliente();
-              printf("escolheu opcao 2");
-
-              break;      
+                              break;
+      case 2:
+             
+             system("cls");
+             sub_clientes1();
+             
+                               break;      
      
      
     
@@ -275,28 +316,65 @@ void menu_principal(){
        
           importarParcelas();
           
-          break;
+                               break;
           
          
          
          
          
-          case 5:
+       case 5:
                
             Creditos();
                
-               break;
+                         break;
      }
-
+    	  
+    		break;
+     } 
 }
 
-//----------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
 
 int main(){
     
   
       menu_principal();
    
+    switch(opmen1){
+                    
+     case 1:
+             
+         importarCliente();
+         
+         importarParcelas();
+             
+                            break;
+              
+              
+     case 2:
+             
+          system("cls");
+          sub_clientes1();
+             
+                           break;      
+     
+     case 3: 
+       
+      
+          
+                              break;
+        
+     case 5:
+               
+            Creditos();
+               
+                         break;
+     }  
+     
+     
+     
+     
+     
     system("pause");
    
 }
