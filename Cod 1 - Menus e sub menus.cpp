@@ -45,7 +45,10 @@ FILE *arqpar;
             struct registroParc parc[200];
 
  //=================================================     
-int opmen1, totcli, p, col, totparce, opmen2;
+int totcli, p, col, totparce, opmen2;
+
+int opmen1, opmenconsulta0, opmenconsulta01, opmen1v1, opmen1v2;
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
@@ -174,7 +177,8 @@ char *result;
 void Creditos(){
      
         system("cls");
-               printf("\n\n                         Programa feito por: ");
+                      printf("\n\n\n");
+               printf("\t\t\tPrograma feito por: ");
                Sleep(1500);
                printf("\n          -  Emelin\n\n");
                Sleep(1000);
@@ -185,7 +189,8 @@ void Creditos(){
                printf("\n          -  Rudi\n\n");
                Sleep(5000);
                system("cls");
-               printf("\n\n                              Obrigado!\n\n\n");
+               printf("\n\n\n");
+               printf("\t\t\tObrigado!\n\n\n");
                
                Sleep(1500);
                
@@ -246,14 +251,15 @@ void menu_principal(){
      
      system("cls");  
      printf("\n\n\n");
-     printf("1 - Importacao \n\n");
-     printf("2 - clientes \n\n");
-     printf("3 - parcelas \n\n");
-     printf("4 - consultas \n\n");
-     printf("5 - creditos \n\n");
-     printf("6 - fim \n\n");
+     printf("\t\t_-_-_-_-_-_-_-_-_-_-_=Sistema=_-_-_-_-_-_-_-_-_-_-_\n\n");
+     printf("\t\t( 1 )    Importacao    \t\t");
+     printf("( 2 )    Clientes      \t\t\n");
+     printf("\t\t( 3 )    Parcelas      \t\t");
+     printf("( 4 )    Consultas      \t\t\n");
+     printf("\t\t( 5 )    Creditos      \t\t");
+    // printf("\t\t_-_-_-_-_-_-_-_-_-_-__-_-_-_-_-_-_-_-_-_-_\n\n");    
      
-     printf("\n\n");
+     printf("\n\n\n\n");
      
      printf("Digite uma das opções para prosseguir: ");
      scanf("%i", &opmen1);
@@ -288,6 +294,9 @@ void sub_clientes1()
      	system("cls");
      	              	break;
      		
+     		
+     		
+    //voltar --- 		
 	case 5:
              
  		  system("cls");
@@ -298,6 +307,7 @@ void sub_clientes1()
       case 1:
              
          importarCliente();
+         importarParcelas();
              
                               break;
       case 2:
@@ -315,9 +325,18 @@ void sub_clientes1()
      case 3: 
        
           importarParcelas();
+         
           
                                break;
           
+          
+                                     
+    case 4:
+         
+     //    menuConsultas();
+         
+      
+                              break;
          
          
          
@@ -332,6 +351,128 @@ void sub_clientes1()
     		break;
      } 
 }
+//------------------------------------------------------------------------------------------------------
+void menuConsultas(){
+     
+     system("cls");
+     
+     switch(opmenconsulta0){   
+    case 0:
+        system("cls");
+        printf("\t\t---------------------------------------\n\n");
+        printf("\t\t\tEscolha a Opcao Desejada:");
+             
+        printf("\n\n\n");
+        printf("\t\t( 1 ) - Consultar usando Estado\n\n\n\n");
+        printf("\t\t( 2 ) - Consultar usando Cidade\n\n\n\n");
+        printf("\t\t( 3 ) - Consultar usando Cidade e Estado\n\n\n\n");                      
+        printf("\t\t( 4 ) - Voltar\n\n\n\n");            
+//====== OPÇOES consulta   
+     printf("Digite uma das opcoes para prosseguir: ");
+     scanf("%i", &opmen1v1);
+     printf("\n\n");      
+     switch(opmen1v1){
+//===== COLOCAR estado                      
+     case 1:
+        system("cls"); 
+        printf("\t\t-----------------------------------------------\n\n");             
+        printf("\t\t\t\tDigite seu Estado: "); 
+        
+        printf("\n\n\n");
+      //  scanf("?\n\n\n", );        
+        
+                          break;           
+                 
+     
+                
+                 
+                 
+    case 2:   
+        system("cls"); 
+        printf("\t\t-----------------------------------------------\n\n");             
+        printf("\t\t\t\tDigite sua Cidade: "); 
+    
+        printf("\n\n\n");
+      //  scanf("?\n\n", );
+        fflush(stdin);
+                      break;            
+                
+// TERMINAR   -- CODIGO        
+//========= COLOCAR ESTADO E CIDADE
+   case 3:
+        system("cls");  
+        printf("\t\t-----------------------------------------------\n\n");             
+        printf("\t\t\t\tDigite seu ESTADO: "); 
+       
+        printf("\n\n\n"); 
+ //       scanf("?\n\n", );     
+        fflush(stdin);
+        
+        printf("\t\t-----------------------------------------------\n\n");             
+        printf("\t\t\t\tDigite sua CIDADE: "); 
+        printf("\n\n\n");
+
+   //     scanf("?\n\n\n", );
+        fflush(stdin);
+        printf("\n");  
+                                   break;
+     
+     
+     
+   case 4:
+        
+       system("cls");
+       
+       
+    	  menu_principal();
+    	  
+    	   switch(opmen1){
+                    
+      case 1:
+             
+         importarCliente();
+         importarParcelas();
+                              break;
+      case 2:
+             
+             system("cls");
+             sub_clientes1();
+             
+                               break;      
+     
+     
+    
+    
+    
+    
+     case 3: 
+       
+        
+          importarParcelas();
+          
+                               break;
+                               
+       
+     case 4:
+         
+         menuConsultas();
+         
+      
+                                 break;
+          
+       case 5:
+               
+            Creditos();
+               
+                         break;
+     }
+       
+       
+                     break;
+                     
+                     }// fecha opmen1v1 
+                   } // fecha consulta0
+                     } //fechamento do void
 
 //------------------------------------------------------------------------------------------------------
 
@@ -360,9 +501,17 @@ int main(){
      
      case 3: 
        
+         printf("\n\n\n-falta fazer Parcelas-\n\n\n");
       
           
                               break;
+                              
+    case 4:
+         
+         menuConsultas();
+         
+      
+         break;
         
      case 5:
                
